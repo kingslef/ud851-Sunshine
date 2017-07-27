@@ -39,27 +39,18 @@ public class DetailActivity extends AppCompatActivity {
         MenuInflater inflater = new MenuInflater(this);
         inflater.inflate(R.menu.details, menu);
 
+        // COMPLETED (4) Display the menu and implement the forecast sharing functionality
+        MenuItem menuItem = menu.findItem(R.id.action_share);
+        menuItem.setIntent(createShareIntent());
+
         return true;
     }
 
-    private void share() {
-        ShareCompat.IntentBuilder
+    private Intent createShareIntent() {
+        return ShareCompat.IntentBuilder
                 .from(this)
                 .setType("text/plain")
                 .setText(mForecast + FORECAST_SHARE_HASHTAG)
-                .startChooser();
-    }
-
-
-    // COMPLETED (4) Display the menu and implement the forecast sharing functionality
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.action_share:
-                share();
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+                .getIntent();
     }
 }
