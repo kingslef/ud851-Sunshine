@@ -211,17 +211,35 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
         return true;
     }
 
+    private void showMap() {
+        String location = SunshinePreferences.DEFAULT_MAP_LOCATION;
+
+        Uri mapUri = new Uri.Builder()
+                .scheme("geo")
+                .path("0,0")
+                .appendQueryParameter("q", location)
+                .build();
+
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapUri);
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_refresh) {
-            mForecastAdapter.setWeatherData(null);
-            loadWeatherData();
-            return true;
+        switch(id) {
+            case R.id.action_refresh:
+                mForecastAdapter.setWeatherData(null);
+                loadWeatherData();
+                return true;
+            case R.id.action_show_map:
+                // COMPLETED (2) Launch the map when the map menu item is clicked
+                showMap();
+                return true;
         }
-
-        // TODO (2) Launch the map when the map menu item is clicked
 
         return super.onOptionsItemSelected(item);
     }

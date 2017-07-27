@@ -31,6 +31,8 @@
         An error has occurred. Please try again by clicking REFRESH
     </string>
 
+    <string name="action_share">Share Weather Details</string>
+    <string name="action_show_map">Show Map</string>
 
     <!-- - - - - - - - - - - - - -->
     <!--Used by SunshineDateUtils-->
